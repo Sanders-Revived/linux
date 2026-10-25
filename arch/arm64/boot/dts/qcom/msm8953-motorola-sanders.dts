@@ -435,9 +435,6 @@
 
 &usb3 {
 	/* Sanders uses a micro-USB device port for the debug gadget. */
-	/delete-property/ usb-role-switch;
-	/delete-property/ role-switch-default-mode;
-	dr_mode = "peripheral";
 	status = "okay";
 };
 
