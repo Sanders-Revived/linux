@@ -165,22 +165,6 @@
 	/delete-property/ dmas;
 	/delete-property/ dma-names;
 
-	touchscreen@20 {
-		compatible = "syna,rmi4-i2c";
-		reg = <0x20>;
-
-		interrupt-parent = <&tlmm>;
-		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&ts_reset>;
-
-		reset-gpios = <&tlmm 64 GPIO_ACTIVE_LOW>;
-
-		vdd-supply = <&pm8953_l22>;
-		vio-supply = <&pm8953_l6>;
-	};
-
 	touchscreen@38 {
 		compatible = "focaltech,ft5426";
 		reg = <0x38>;
@@ -224,7 +208,7 @@
 	vddio-supply = <&pm8953_l6>;
 
 	panel: panel@0 {
-		compatible = "motorola,sanders-djn-ili7807d", "motorola,sanders-panel";
+		compatible = "motorola,sanders-tianma-nt35596";
 		reg = <0>;
 
 		backlight = <&pmi8950_wled>;

@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Motorola Moto G5S Plus (sanders) with the DJN ILI7807D panel.
+ */
+/dts-v1/;
+
+#include "msm8953-motorola-sanders.dts"
+
+/ {
+	model = "Motorola Moto G5S Plus (DJN ILI7807D)";
+};
+
+&panel {
+	compatible = "motorola,sanders-djn-ili7807d";
+};
