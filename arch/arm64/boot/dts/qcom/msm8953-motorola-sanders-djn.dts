@@ -11,5 +11,5 @@
 };
 
 &panel {
-	compatible = "motorola,sanders-djn-ili7807d";
+	compatible = "tenor,ili7807d_djn";
 };
