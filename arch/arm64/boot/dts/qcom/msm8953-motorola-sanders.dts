@@ -130,6 +130,8 @@
 
 		VA-supply = <&vph_pwr>;
 		VP-supply = <&vph_pwr>;
+		/* The stock Sanders amplifier uses a 1 uH boost inductor. */
+		cirrus,boost-ind-nanohenry = <1000>;
 	};
 
 	light-sensor@23 {
@@ -434,7 +436,8 @@
 };
 
 &usb3 {
-	/* Sanders uses a micro-USB device port for the debug gadget. */
+	/* The stock device tree exposes the micro-USB port as OTG. */
+	dr_mode = "otg";
 	status = "okay";
 };
 
