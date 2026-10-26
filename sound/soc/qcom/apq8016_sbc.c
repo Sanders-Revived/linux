@@ -255,6 +255,10 @@ static int msm8916_qdsp6_startup(struct snd_pcm_substream *substream)
 	 */
 	if (cpu_dai->id == QUINARY_MI2S_RX) {
 		snd_soc_dai_set_fmt(codec_dai, SND_SOC_DAIFMT_BC_FC | SND_SOC_DAIFMT_I2S);
+		ret = snd_soc_dai_set_sysclk(codec_dai, 0, MI2S_BCLK_RATE,
+					     SND_SOC_CLOCK_IN);
+		if (ret)
+			dev_err(card->dev, "Failed to set Quinary codec bit clk: %d\n", ret);
 	}
 
 	ret = snd_soc_dai_set_sysclk(cpu_dai, qdsp6_get_bit_clk_id(data, mi2s), MI2S_BCLK_RATE, 0);
