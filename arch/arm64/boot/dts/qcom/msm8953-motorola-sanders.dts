@@ -98,6 +98,23 @@
 	};
 };
 
+/* Sanders audio amplifier GPIO electrical states, matching the stock DTS. */
+&tlmm {
+	cs35l35_reset_default: cs35l35-reset-default {
+		pins = "gpio137";
+		function = "gpio";
+		bias-pull-up;
+		drive-strength = <2>;
+	};
+
+	cs35l35_irq_default: cs35l35-irq-default {
+		pins = "gpio132";
+		function = "gpio";
+		bias-pull-up;
+		drive-strength = <2>;
+	};
+};
+
 &i2c_5 {
 	status = "okay";
 
@@ -132,6 +149,8 @@
 		VP-supply = <&vph_pwr>;
 		/* The stock Sanders amplifier uses a 1 uH boost inductor. */
 		cirrus,boost-ind-nanohenry = <1000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&cs35l35_irq_default &cs35l35_reset_default>;
 	};
 
 	light-sensor@23 {
