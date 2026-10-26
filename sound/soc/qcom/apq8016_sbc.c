@@ -140,8 +140,8 @@ static int apq8016_dai_init(struct snd_soc_pcm_runtime *rtd, int mi2s)
 
 		component = codec_dai->component;
 		/* The Sanders CS35L35 requires 12.288 MHz for 48 kHz playback. */
-		if (component->driver && component->driver->name &&
-		    !strncmp(component->driver->name, "cs35l35",
+		if (component->name &&
+		    !strncmp(component->name, "cs35l35",
 			     strlen("cs35l35")))
 			mclk_rate = 12288000;
 
