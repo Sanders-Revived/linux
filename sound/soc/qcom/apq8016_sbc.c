@@ -8,6 +8,7 @@
 #include <linux/kernel.h>
 #include <linux/io.h>
 #include <linux/of.h>
+#include <linux/string.h>
 #include <linux/clk.h>
 #include <linux/platform_device.h>
 #include <sound/pcm.h>
@@ -135,10 +136,16 @@ static int apq8016_dai_init(struct snd_soc_pcm_runtime *rtd, int mi2s)
 	}
 
 	for_each_rtd_codec_dais(rtd, i, codec_dai) {
+		unsigned int mclk_rate = DEFAULT_MCLK_RATE;
 
 		component = codec_dai->component;
-		/* Set default mclk for internal codec */
-		rval = snd_soc_component_set_sysclk(component, 0, 0, DEFAULT_MCLK_RATE,
+		/* The Sanders CS35L35 requires 12.288 MHz for 48 kHz playback. */
+		if (component->driver && component->driver->name &&
+		    !strcmp(component->driver->name, "cs35l35"))
+			mclk_rate = 12288000;
+
+		/* Set the default mclk for the codec. */
+		rval = snd_soc_component_set_sysclk(component, 0, 0, mclk_rate,
 				       SND_SOC_CLOCK_IN);
 		if (rval != 0 && rval != -ENOTSUPP) {
 			dev_warn(card->dev, "Failed to set mclk: %d\n", rval);
