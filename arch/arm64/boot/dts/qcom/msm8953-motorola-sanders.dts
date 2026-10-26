@@ -103,6 +103,7 @@
 	cs35l35_reset_default: cs35l35-reset-default {
 		pins = "gpio137";
 		function = "gpio";
+		output-high;
 		bias-pull-up;
 		drive-strength = <2>;
 	};
@@ -143,7 +144,8 @@
 		interrupt-parent = <&tlmm>;
 		interrupts = <132 IRQ_TYPE_LEVEL_LOW>;
 
-		reset-gpios = <&tlmm 137 GPIO_ACTIVE_LOW>;
+		/* The stock Sanders reset line is active high. */
+		reset-gpios = <&tlmm 137 GPIO_ACTIVE_HIGH>;
 
 		VA-supply = <&vph_pwr>;
 		VP-supply = <&vph_pwr>;
